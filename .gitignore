@@ -134,3 +134,6 @@ dmypy.json
 
 # Postgres details
 login_details.py
+
+# API key
+config.js
