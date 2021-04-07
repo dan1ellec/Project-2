@@ -8,6 +8,7 @@ DROP TABLE marriage_postal_participants_by_age;
 DROP TABLE "2017_population_agedemo";
 DROP TABLE cultural_diversity;
 DROP TABLE education;
+DROP TABLE labor_liberal_votes;
 
 
 
@@ -130,6 +131,17 @@ CREATE TABLE "education" (
      )
 );
 
+CREATE TABLE "labor_liberal_votes" (
+    "division_id" INT   NOT NULL,
+    "liberal_votes" INT   NOT NULL,
+    "liberal_percent" FLOAT   NOT NULL,
+    "labor_votes" INT   NOT NULL,
+    "labor_percent" FLOAT   NOT NULL,
+    CONSTRAINT "pk_labor_liberal_votes" PRIMARY KEY (
+        "division_id"
+     )
+);
+
 ALTER TABLE "election_results" ADD CONSTRAINT "fk_election_results_division_id" FOREIGN KEY("division_id")
 REFERENCES "electoral_division" ("division_id");
 
@@ -155,6 +167,9 @@ ALTER TABLE "cultural_diversity" ADD CONSTRAINT "fk_cultural_diversity_division_
 REFERENCES "electoral_division" ("division_id");
 
 ALTER TABLE "education" ADD CONSTRAINT "fk_education_division_id" FOREIGN KEY("division_id")
+REFERENCES "electoral_division" ("division_id");
+
+ALTER TABLE "labor_liberal_votes" ADD CONSTRAINT "fk_labor_liberal_votes_division_id" FOREIGN KEY("division_id")
 REFERENCES "electoral_division" ("division_id");
 
 
