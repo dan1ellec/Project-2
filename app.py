@@ -20,13 +20,11 @@ from flask import (
 #from models import create_classes
 import simplejson
 from flask_sqlalchemy import SQLAlchemy
-#from login_details import username
-#from login_details import password
+from login import username
+from login import password
 
 
-username = "postgres"
 
-password = "dani595!"
 
 
 # Connect to database
