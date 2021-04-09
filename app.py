@@ -59,7 +59,7 @@ session = Session(engine)
 
 print(names)
 
-#Let's setup our Flask application.
+#Setting up our Flask application.
 
 app = Flask(__name__)
 
@@ -79,6 +79,53 @@ def query_results_to_dicts(results):
     # to a format that is json serialisable 
     
     return simplejson.dumps(results)
+
+
+# map
+@app.route("/api/map")
+def test():
+
+    results = session.query(Division.division_id, Division.electoral_division, Division.state, Marriage_Results.division_id, Marriage_Results.yes_count, Marriage_Results.no_count, Results.division_id, Results.successful_party, Marriage_Turnout.division_id, Marriage_Turnout.turnout_percent)\
+                    .join(Marriage_Results, Marriage_Results.division_id == Division.division_id)\
+                    .join(Results, Results.division_id == Division.division_id)\
+                    .join(Marriage_Turnout, Marriage_Turnout.division_id == Division.division_id).all()
+
+    return query_results_to_dicts(results)
+
+
+# bubble
+@app.route("/api/bubble")
+def bubble():
+
+    results = session.query(Division.division_id, Division.electoral_division, Division.state, Marriage_Results.division_id, Marriage_Results.yes_count, Marriage_Results.total_responses, Labor_Liberal.division_id, Labor_Liberal.liberal_percent, Labor_Liberal.labor_percent, Education.division_id, Education.year_12_completion_percent, Education.higher_education_completion_percent)\
+                    .join(Marriage_Results, Marriage_Results.division_id == Division.division_id)\
+                    .join(Labor_Liberal, Labor_Liberal.division_id == Division.division_id)\
+                    .join(Education, Education.division_id == Division.division_id).all()
+
+    return query_results_to_dicts(results)
+
+# pie
+@app.route("/api/pie")
+def pie():
+
+    results = session.query(Division.division_id, Division.electoral_division, Division.state, Marriage_Results.division_id, Marriage_Results.yes_count, Marriage_Results.no_count)\
+                    .join(Marriage_Results, Marriage_Results.division_id == Division.division_id).all()
+
+    return query_results_to_dicts(results)
+
+
+# bar
+# this one won't work because of the column names
+# the flask app still loads and the other routes work but this one won't
+# will need to change the column names for this table
+@app.route("/api/bar")
+def bar():
+
+    results = session.query(Division.division_id, Division.electoral_division, Division.state, Marriage_Participants_Age.division_id, Marriage_Participants_Age.ages_18-34, Marriage_Participants_Age.ages_35-49, Marriage_Participants_Age.ages_50-64, Marriage_Participants_Age.ages_65-79, Marriage_Participants_Age.ages_80_plus)\
+                    .join(Marriage_Participants_Age, Marriage_Participants_Age.division_id == Division.division_id).all()
+
+    return query_results_to_dicts(results)
+
 
 
 # electoral_division table
@@ -142,7 +189,7 @@ def marriage_turnout():
 # @app.route("/api/marriage_participants_age")
 # def marriage_participants_age():
 
-#     results = session.query(Marriage_Participants_Age.division_id, Marriage_Participants_Age.ages_18-34, Marriage_Participants_Age.ages_35-49, Marriage_Participants_Age.ages_50-64, Marriage_Participants_Age.ages_65-79, Marriage_Participants_Age.ages_80_plus).all()
+#     results = session.query(Marriage_Participants_Age.division_id, Marriage_Participants_Age["ages_18-34"], Marriage_Participants_Age["ages_35-49"], Marriage_Participants_Age["ages_50-64"], Marriage_Participants_Age["ages_65-79"], Marriage_Participants_Age.ages_80_plus).all()
    
 #     return query_results_to_dicts(results)
 
