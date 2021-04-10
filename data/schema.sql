@@ -84,10 +84,10 @@ CREATE TABLE "marriage_postal_turnout" (
 
 CREATE TABLE "marriage_postal_participants_by_age" (
     "division_id" INT   NOT NULL,
-    "ages_18-34" INT   NOT NULL,
-    "ages_35-49" INT   NOT NULL,
-    "ages_50-64" INT   NOT NULL,
-    "ages_65-79" INT   NOT NULL,
+    "ages_18_34" INT   NOT NULL,
+    "ages_35_49" INT   NOT NULL,
+    "ages_50_64" INT   NOT NULL,
+    "ages_65_79" INT   NOT NULL,
     "ages_80_plus" INT   NOT NULL,
     CONSTRAINT "pk_marriage_postal_participants_by_age" PRIMARY KEY (
         "division_id"

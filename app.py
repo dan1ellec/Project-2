@@ -115,13 +115,11 @@ def pie():
 
 
 # bar
-# this one won't work because of the column names
-# the flask app still loads and the other routes work but this one won't
-# will need to change the column names for this table
+# this one now works!
 @app.route("/api/bar")
 def bar():
 
-    results = session.query(Division.division_id, Division.electoral_division, Division.state, Marriage_Participants_Age.division_id, Marriage_Participants_Age.ages_18-34, Marriage_Participants_Age.ages_35-49, Marriage_Participants_Age.ages_50-64, Marriage_Participants_Age.ages_65-79, Marriage_Participants_Age.ages_80_plus)\
+    results = session.query(Division.division_id, Division.electoral_division, Division.state, Marriage_Participants_Age.division_id, Marriage_Participants_Age.ages_18_34, Marriage_Participants_Age.ages_35_49, Marriage_Participants_Age.ages_50_64, Marriage_Participants_Age.ages_65_79, Marriage_Participants_Age.ages_80_plus)\
                     .join(Marriage_Participants_Age, Marriage_Participants_Age.division_id == Division.division_id).all()
 
     return query_results_to_dicts(results)
