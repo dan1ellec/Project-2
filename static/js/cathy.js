@@ -110,8 +110,9 @@ function buildCharts () {
             text: electorate_label, // can we add yes percentage and some string info here?
             mode: 'markers',
             marker: {
-                size: percent_yes
-                // color: set up scale
+                size: percent_yes,
+                color: x_values,
+                colorscale: "RdBu"
             }
         };
       
