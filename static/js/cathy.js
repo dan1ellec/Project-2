@@ -457,7 +457,7 @@ function starting_plots(index){
         var pie_labels = ["Yes votes", "No votes"];
         
         // Creating a variable for colours
-        var pie_colours = ["LightSlateGrey", "LightGrey"];
+        var pie_colours = ["rgb(50, 55, 60)", "LightGrey"];
         
         
         // Plotting pie chart
@@ -473,8 +473,8 @@ function starting_plots(index){
         
         var layout = {
             title: `Total Vote Types for State ${stateNames[index]}`,
-            height: 700,
-            width: 700
+            height: 600,
+            width: 600
         };
         
         Plotly.newPlot('pie', data, layout);
