@@ -1,15 +1,21 @@
-url_bubble = "api/bubble";
+const url_bubble = "api/bubble";
 
-// d3.json(url).then(function(data){ 
+const url_bar = "api/bar";
+
+const url_pie = "api/pie"; 
+
+// d3.json(url_pie).then(function(data){ 
+//     console.log("PIE DATA")
 //     console.log(data);
 // });
+
 
 
 //////////////////////////////////////////////////////////////////////////////
 
 
 // CREATING INITIAL FUNCTION 
-// Creates dropdown menu and sets bubble chart with an initial value
+// Creates dropdown menu and sets charts with an initial value
 function init() {
     // Using D3 to select the dropdown menu
     var dropdownMenu = d3.select("#selDataset");
@@ -36,7 +42,7 @@ function init() {
           }, {});
 
           // Checking the groupby is working properly
-          console.log("GROUPBY STATES");
+          console.log("GROUPBY STATES for dropdown");
           console.log(states);
 
           stateNames = Object.keys(states);
@@ -60,12 +66,14 @@ function init() {
 init();
 
 
-//////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
 
 
-// CREATING A FUNCTION FOR THE STARTING PLOTS - CAN ADD BAR CHART TO THIS
-// Using variable index again as this will relate to the selected state in the dropdown menu and reference the index of the object needed from the sampleData array
+// CREATING A FUNCTION FOR THE STARTING PLOTS - bubble, bar and pie
+// Using variable index as this will relate to the selected state in the dropdown menu and reference the index of the object needed from the sampleData array
 function starting_plots(index){
+
+    // Reading in data for bubble chart
     d3.json(url_bubble).then((data) => {
 
         // Groupby of states
@@ -80,7 +88,7 @@ function starting_plots(index){
         
         // Accessing the information for each state
         stateInfo = Object.values(states)
-        console.log("testing accessing a particular state")
+        console.log("testing accessing a particular state for bubble")
         console.log(stateInfo[1])
 
 
@@ -88,7 +96,7 @@ function starting_plots(index){
         var sampleData = stateInfo; 
         // obtaining particular section using index
         var section = sampleData[index];
-        console.log("STARTING SECTION");
+        console.log("STARTING SECTION for bubble - SA");
         console.log(section);
 
 
@@ -138,14 +146,28 @@ function starting_plots(index){
             marker: {
                 size: percent_yes,
                 color: x_values,
-                colorscale: "RdBu"
+                colorscale: "RdBu",
+                colorbar: {
+                    thickness: 10,
+                    y: 0.5,
+                    ypad: 0,
+                    title: 'Liberal to labor',
+                    titleside: 'bottom',
+                    outlinewidth: 1,
+                    outlinecolor: 'black',
+                    tickfont: {
+                      family: 'Arial',
+                      size: 12,
+                      color: 'black'
+                    }
+                  }
             }
         };
       
         var data = [trace1];
       
         var layout = {
-            title: `Correlation between federal election results and education, size of bubble represented by percentage of yes votes`,
+            title: `Correlation between federal election results and education for State ${stateNames[index]} Size of bubble represented by percentage of yes votes`,
             xaxis: {
              title: "Percentage of labor votes in 2016 federal election as opposed to liberal"
             },
@@ -159,11 +181,309 @@ function starting_plots(index){
       
         // Render the plot to the div tag with id "bubble"
         Plotly.newPlot('bubble', data, layout);
-
-
         
-        }) // end of reading in data
-    }; //end of starting_plots function
+        }); // end of reading in data for bubble
+
+
+
+///////////////////////////////////////////////////////////////////
+
+
+
+    // Reading in data for bar chart
+    d3.json(url_bar).then((data) => {
+        console.log("BAR DATA")
+        console.log(data);
+
+        const states = data.reduce((acc, value) => {
+            if (!acc[value.state]) {
+                acc[value.state] = [];
+            }
+            acc[value.state].push(value);
+            return acc;
+            }, {}
+            );
+        console.log("Testing groupby of bar data")
+        console.log(states);
+
+        stateNames = Object.keys(states);
+        console.log("Testing state names in bar")
+        console.log(stateNames);
+
+        // Accessing the information for each state
+        stateInfo = Object.values(states)
+        console.log("testing bar state info")
+        console.log(stateInfo)
+
+
+        // need to access the state information section
+        var sampleData = stateInfo; 
+        // obtaining particular section using index
+        var section = sampleData[index];
+        console.log("Starting section for bar - SA");
+        console.log(section);
+
+
+        // Obtaining the values for the bar chart 
+
+        // ages_18_34: 20745
+        var ages_18_34 = [];
+        var i;
+        for (i = 0; i < section.length; i++) {
+            var value = section[i].ages_18_34;
+            var total = section[i].ages_18_34 + section[i].ages_35_49 + section[i].ages_50_64 + section[i].ages_65_79 + section[i].ages_80_plus
+            var percent = Math.round((value/total)*100);
+            ages_18_34.push(percent);
+        }
+        console.log("ages_18_34");
+        console.log(ages_18_34);
+
+        // ages_35_49: 18667
+        var ages_35_49 = [];
+        var i;
+        for (i = 0; i < section.length; i++) {
+            value = section[i].ages_35_49;
+            var total = section[i].ages_18_34 + section[i].ages_35_49 + section[i].ages_50_64 + section[i].ages_65_79 + section[i].ages_80_plus
+            var percent = Math.round((value/total)*100);
+            ages_35_49.push(percent);
+        }
+        
+        // ages_50_64: 21236
+        var ages_50_64 = [];
+        var i;
+        for (i = 0; i < section.length; i++) {
+            value = section[i].ages_50_64;
+            var total = section[i].ages_18_34 + section[i].ages_35_49 + section[i].ages_50_64 + section[i].ages_65_79 + section[i].ages_80_plus
+            var percent = Math.round((value/total)*100);
+            ages_50_64.push(percent);
+        }
+        
+        // ages_65_79: 13420
+        var ages_65_79 = [];
+        var i;
+        for (i = 0; i < section.length; i++) {
+            value = section[i].ages_65_79;
+            var total = section[i].ages_18_34 + section[i].ages_35_49 + section[i].ages_50_64 + section[i].ages_65_79 + section[i].ages_80_plus
+            var percent = Math.round((value/total)*100);
+            ages_65_79.push(percent);
+        }
+        
+        // ages_80_plus: 3638
+        var ages_80_plus = [];
+        var i;
+        for (i = 0; i < section.length; i++) {
+            value = section[i].ages_80_plus;
+            var total = section[i].ages_18_34 + section[i].ages_35_49 + section[i].ages_50_64 + section[i].ages_65_79 + section[i].ages_80_plus
+            var percent = Math.round((value/total)*100);
+            ages_80_plus.push(percent);
+        }
+        
+        // Names
+        var electoral_divisions = [];
+        var i;
+        for (i = 0; i < section.length; i++) {
+            value = section[i].electoral_division;
+            electoral_divisions.push(value)
+        }
+
+
+        // Plotting bar chart
+
+        var trace1 = {
+            y: electoral_divisions,
+            x: ages_18_34,
+            name: "Ages 18-3",
+            orientation: "h",
+            marker: {
+                color: "LightSteelBlue", 
+                width: 1
+            },
+            type: "bar"
+        };
+        var trace2 = {
+            y: electoral_divisions,
+            x: ages_35_49,
+            name: "Ages 35-49",
+            orientation: "h",
+            type: "bar",
+            marker: {
+                color: "LightSlateGrey", 
+                width: 1
+            }
+        };
+        var trace3 = {
+            y: electoral_divisions,
+            x: ages_50_64,
+            name: "Ages 50-64",
+            orientation: "h",
+            type: "bar",
+            marker: {
+                color: "DimGray", 
+                width: 1
+            }
+        };
+        var trace4 = {
+            y: electoral_divisions,
+            x: ages_65_79,
+            name: "Ages 65-79",
+            orientation: "h",
+            type: "bar",
+            marker: {
+                color: "DarkCyan",
+                width: 1
+            }
+        };
+        var trace5 = {
+            y: electoral_divisions,
+            x: ages_80_plus,
+            name: "Ages 80+",
+            orientation: "h",
+            type: "bar",
+            marker: {
+                color: "DarkSlateGray",
+                width: 1
+            }
+        };
+        var data = [trace1, trace2, trace3, trace4, trace5];
+        var layout = {
+            title: `Survey Respondents by Age for State ${stateNames[index]}`,
+            barmode: "stack",
+            height: 700,
+            width: 600,
+            yaxis:{title: "Federal Electorate"},
+            xaxis:{title: "Percentage"}
+        };
+        Plotly.newPlot("bar", data, layout);
+
+    }); // end of reading in data for bar 
+
+
+///////////////////////////////////////////////////////////////////////////////
+
+    
+    // Reading in data for pie chart
+    d3.json(url_pie).then((data) => {
+        console.log("PIE DATA")
+        console.log(data);
+
+        const states = data.reduce((acc, value) => {
+            if (!acc[value.state]) {
+                acc[value.state] = [];
+            }
+            acc[value.state].push(value);
+            return acc;
+            }, {}
+            );
+        console.log("Testing groupby of pie data")
+        console.log(states);
+
+        stateNames = Object.keys(states);
+        console.log("Testing state names for pie")
+        console.log(stateNames);
+
+        // Accessing the information for each state
+        stateInfo = Object.values(states)
+        console.log("testing pie state info")
+        console.log(stateInfo)
+
+
+        // need to access the state information section
+        var sampleData = stateInfo; 
+        // obtaining particular section using index
+        var section = sampleData[index];
+        console.log("Starting section for pie - SA");
+        console.log(section);
+
+
+        // Obtaining the values for the pie chart
+
+        var yes_values = [];
+        var i;
+        for (i = 0; i < section.length; i++) {
+            yes_count = section[i].yes_count;
+            yes_values.push(yes_count);
+        }
+        console.log(" PIE yes count for all of selected state")
+        console.log(yes_values)
+
+        var no_values = [];
+        var i;
+        for (i = 0; i < section.length; i++) {
+            no_count = section[i].no_count;
+            no_values.push(no_count);
+        }
+
+        // Need to sum these values in the array together
+        var sum_yes = yes_values.reduce(function(a, b){
+            return a + b;
+        }, 0);
+        console.log("SUM OF YES for electorals of selected state");
+        console.log(sum_yes);
+
+        // Need to sum these values in the array together
+        var sum_no = no_values.reduce(function(a, b){
+            return a + b;
+        }, 0);
+        console.log("SUM OF NO for electorals of selected state");
+        console.log(sum_no);
+
+        // DIDN'T NEED TO DO THIS AS PIE CALCULATES PERCENTAGE FOR YOU
+        // // Calculating the sums as a percentage
+        // var total_votes = sum_no + sum_yes
+
+        // var yes_percent = Math.round((sum_yes/total_votes)*100)
+        // console.log ("yes percent for selected state")
+        // console.log (yes_percent)
+
+        // var no_percent = Math.round((sum_no/total_votes)*100)
+        // console.log ("no percent for selected state")
+        // console.log (no_percent)
+
+        // // Creating a variable values that pushes yes and no percentages into an array
+        // var pie_values = [];
+        // pie_values.push(yes_percent)
+        // pie_values.push(no_percent)
+        // console.log("VALUES FOR PIE CHART for electorals of selected state")
+        // console.log(pie_values)
+
+        // Creating a variable for pie values that pushes yes and no sums into an array
+        var pie_values = [];
+        pie_values.push(sum_yes)
+        pie_values.push(sum_no)
+        console.log("VALUES FOR PIE CHART for electorals of selected state")
+        console.log(pie_values)
+
+        // Creating a variable for labels
+        var pie_labels = ["Yes votes", "No votes"];
+        
+        // Creating a variable for colours
+        var pie_colours = ["LightSlateGrey", "LightGrey"];
+        
+        
+        // Plotting pie chart
+
+        var data = [{
+            values: pie_values,
+            labels: pie_labels, 
+            type: 'pie',
+            marker: {
+                colors: pie_colours
+              }
+        }];
+        
+        var layout = {
+            title: `Total Vote Types for State ${stateNames[index]}`,
+            height: 700,
+            width: 700
+        };
+        
+        Plotly.newPlot('pie', data, layout);
+
+
+    }); // end of reading in data for pie
+
+
+}; //end of starting_plots function
 // starting_plots();
 
 
@@ -229,4 +549,29 @@ function optionChanged(stateSelection) {
 
 };
 // optionChanged();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
