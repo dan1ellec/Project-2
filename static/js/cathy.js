@@ -107,20 +107,21 @@ function buildCharts () {
             x: x_values, 
             y: y_values,
             type: "scatter",
-            text: electorate_label, // can we add yes percentage and some string info here?
+            text: electorate_label, 
             mode: 'markers',
             marker: {
-                size: percent_yes
-                // color: set up scale
+                size: percent_yes,
+                color: x_values,
+                colorscale: "RdBu"
             }
         };
       
         var data = [trace1];
       
         var layout = {
-            title: `Bubble chart`,
+            title: `Correlation between federal election results and education, size of bubble represented by percentage of yes votes`,
             xaxis: {
-             title: "Percentage of labor votes in 2016 federal election"
+             title: "Percentage of labor votes in 2016 federal election as opposed to liberal"
             },
             yaxis: {
                 title: "Percentage of population with a higher education"
