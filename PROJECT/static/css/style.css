@@ -1,0 +1,134 @@
+
+.jumbotron {
+  color:white;
+  background-color: rgb(47, 162, 150);
+}
+
+
+p {
+  font: 12px;
+}
+
+#map
+{
+    width: 100px;
+    height:100px;
+    min-height: 100%;
+    min-width: 100%;
+    display: block;
+}
+
+html, body
+{
+    height: 100%;
+}
+
+#map-holder{
+    height: 100%;
+}
+
+.fill
+{
+    min-height: 100%;
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
+}
+
+.mapcontainer{
+    max-width:60em;
+    padding: 0.2em;
+}
+
+
+/* css styling relating to choropleth and map */
+body {
+  padding: 0;
+  margin: 0;
+}
+
+#map,
+body,
+html {
+  height: 100%;
+}
+
+.leaflet-popup-content {
+  text-align: center;
+}
+
+/* CSS from the Leaflet-Choropleth documentation */
+.legend {
+  padding: 6px 8px;
+  font: 12px Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: #555;
+  background: #fff;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.legend ul {
+  padding: 0;
+  margin: 0;
+  clear: both;
+  list-style-type: none;
+}
+
+.legend li {
+  display: inline-block;
+  width: 30px;
+  height: 22px;
+}
+
+.legend .min {
+  float: left;
+  padding-bottom: 5px;
+}
+
+.legend .max {
+  float: right;
+}
+
+h1 {
+  text-align: center;
+  font: 18px;
+}
+
+/* navbar*/
+
+#navbar-rectangle {
+  width: 100%;
+  /* top,right,bottom,left*/
+  padding-top: 10px; 
+  padding-bottom: 10px;
+
+  background-color: rgb(47, 162, 150);
+}
+
+
+/*changing background color for tablets and smaller devices*/
+@media only screen and (max-width: 992px) {
+  #navbar-rectangle {
+  background-color:rgb(47, 162, 150);
+  }
+}
+
+
+#navbar-header {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-size: 25px;
+  color:white;
+  background-color: rgb(47, 162, 150);
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.nav-link {
+  font-size: 15px;
+  color:white;
+}
