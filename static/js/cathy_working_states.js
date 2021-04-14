@@ -1,6 +1,3 @@
-// 3 X CHARTS FOR EACH STATE
-// NEED TO TIDY UP CODE
-
 const url_bubble = "api/bubble";
 
 const url_bar = "api/bar";
