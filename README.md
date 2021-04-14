@@ -19,7 +19,7 @@ A `login_details.py` file will need to be created which contains username = “u
 
 A PostgreSQL database has been created, as per the ERD below:
 
-![ERD](entity_relationship_diagram.png)
+![ERD](data/entity_relationship_diagram.png)
 
 ## Credits
 
@@ -57,21 +57,22 @@ More detailed information on the coding approach can be found here (include link
 
 The following data mungling techniques have been used:
 - Checking datatypes
-- Remove NaN values
+- Remove NaN values and duplicates
 - Drop irrelevant columns and rename columns
 - Set primary key as index
 - Merge tables (joining on primary key)
 - Perform “group by” functions and aggregates to run calculations 
-- Create bins for consistency within all tables
+- Recreate bins so that all age bins used within all tables are consistent 
+
 
 
 ## Visualisations
 
 The following visualisations have been created:
 - Pie chart -  This compares the yes and no votes for the Marriage Postal Survey in Australia
-- Bubble chart - A state can be selected from the drop down menu. The chart reflects for each electorate within that state the % of liberal votes (x-axis) where the colour is indicative of the succesful party % of higher education completed (y-axis). The size of the bubbles reflect the % of yes votes for the Marriage Postal Survey.
-- Bar chart - A state can be selected from the drop down menu. The chart reflects the age demographics of each electorate.
-- Map
+- Bubble chart - A state can be selected from the drop down menu. The chart reflects for each electorate within that state the % of labor votes (x-axis) where the colour is indicative of the succesful party and the % of higher education completed (y-axis). The size of the bubbles reflects the % of yes votes for the Marriage Postal Survey.
+- Bar chart - A state can be selected from the drop down menu. The chart reflects the age demographics (classified in age bins) of the respondents within each electorate.
+- Map - The map shoes the percentage of yes votes for each electorate based on colour coding. An electorate can be selected which shows a label with details on the electorate, elected party, % of yes votes and participation rate 	in XXX.
 
 ## Observations
 
