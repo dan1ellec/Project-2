@@ -38,7 +38,6 @@ This analysis can provide valuable insights for political parties and campaign o
 The following relationships have been analysed:
 - Federal Elections results and Marriage Law Postal Survey results
 - Federal Elections results, Marriage Law Postal Survey results and socio-economic factors (age and education)
-- socio-economic factors and the way of voting (postal or in person)
 
 ## Coding approach
 The following approach has been used:
@@ -72,7 +71,7 @@ The following visualisations have been created:
 - Pie chart -  This compares the yes and no votes for the Marriage Postal Survey in Australia
 - Bubble chart - A state can be selected from the drop down menu. The chart reflects for each electorate within that state the % of labor votes (x-axis) where the colour is indicative of the succesful party and the % of higher education completed (y-axis). The size of the bubbles reflects the % of yes votes for the Marriage Postal Survey.
 - Bar chart - A state can be selected from the drop down menu. The chart reflects the age demographics (classified in age bins) of the respondents within each electorate.
-- Map - The map shoes the percentage of yes votes for each electorate based on colour coding. An electorate can be selected which shows a label with details on the electorate, elected party, % of yes votes and participation rate 	in XXX.
+- Map - The map shoes the percentage of yes votes for each electorate based on colour coding. An electorate can be selected which shows a label with details on the electorate, elected party, % of yes votes and participation rate the Marriage Postal Survey.
 
 ## Observations
 
