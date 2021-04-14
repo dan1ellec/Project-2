@@ -47,14 +47,14 @@ The following relationships can be analysed:
 
 ## Project overview
 - ETL Project
-- 	Extract, transform and load data related to the federal elections held in Australia 2016 and the MPS held in 2017. 
-- 	The ETL project generated a database that can be used for trend analysis on federal election and MPS results in states/electoral divisions
+	- Extract, transform and load data related to the federal elections held in Australia 2016 and the MPS held in 2017. 
+	- The ETL project generated a database that can be used for trend analysis on federal election and MPS results in states/electoral divisions
 - Set up a Flask app that creates routes to underlying data in the created database 
 - Create visualisations – upon selection of a state in the dropdown menu:
-- 	The  bar chart will reflect the MPS respondents classified by age
-- 	The pie chart will reflect the percentage of votes for a change in law (“yes votes”)
-- 	The bubble chart will reflect the % of yes votes, the % of votes for the Labor Party and the % of population that with a higher education
-- 	The map will reflect the electorates within each state, the elected political party, the % of yes votes and the participation rate in the MPS
+	- The  bar chart will reflect the MPS respondents classified by age
+	- The pie chart will reflect the percentage of votes for a change in law (“yes votes”)
+	- The bubble chart will reflect the % of yes votes, the % of votes for the Labor Party and the % of population that with a higher education
+	- The map will reflect the electorates within each state, the elected political party, the % of yes votes and the participation rate in the MPS
 
 
 ## Coding approach
