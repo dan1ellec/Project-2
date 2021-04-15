@@ -6,6 +6,7 @@ This project creates a relational database and has been used for trend analysis 
 
 This is a Flask powered visualisation using Plotly and Javascript.
 
+
 ## How is the database sourced?
 
 Data has been retrieved through the use of document downloads and web scraping. Any downloaded files are located in the resources folder. Jupyter notebooks are then used to access, transform and export the data.
@@ -21,6 +22,7 @@ A PostgreSQL database has been created, as per the ERD below:
 
 ![ERD](data/entity_relationship_diagram.png)
 
+
 ## Credits
 
 Data sourced from:
@@ -31,26 +33,41 @@ Data sourced from:
 - Kaggle: Australian Marriage Law Postal Survey [Participant Information](https://www.kaggle.com/mylesoneill/australian-marriage-law-postal-survey?select=participant-information.csv)
 - Australian Bureau of Statistics: [Commonwealth Electorate Data](https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/2082.02019?OpenDocument)
 
+
 ## Theme and purpose
 
-Trend analysis on 2016 Federal Elections results and 2017 Marriage Law Postal Survey results from the Australian electoral divisions in each state
-This analysis can provide valuable insights for political parties and campaign organisers for future federal elections and surveys when running their campaigns
-The following relationships have been analysed:
-- Federal Elections results and Marriage Law Postal Survey results
-- Federal Elections results, Marriage Law Postal Survey results and socio-economic factors (age and education)
+Federal elections were held in 2016 in Australia. In 2017, a postal survey was organised to ask respondents whether the law should be changed to allow same-sex couples to marry.
+The theme of this project is how is the outcome of the federal elections in 2016 are reflected in the outcome of the Australian Marriage Law Postal Survey (“MPS”). Is there a relationship between these outcomes and socio-economic factors such as age and education?
+This can provide valuable insights for political parties and campaign organisers for future federal elections and surveys when running their campaigns
+The following relationships can be analysed:
+- Do highly educated people tend to vote for same-sex marriage?
+- Do young(er) people tend to vote for same-sex marriage?
+- Is there a relationship between the above and elected party within the states and electorates? 
+
+
+## Project overview
+- ETL Project
+	- Extract, transform and load data related to the federal elections held in Australia 2016 and the MPS held in 2017. 
+	- The ETL project generated a database that can be used for trend analysis on federal election and MPS results in states/electoral divisions
+- Set up a Flask app that creates routes to underlying data in the created database 
+- Create visualisations – upon selection of a state in the dropdown menu:
+	- The  bar chart will reflect the MPS respondents classified by age
+	- The pie chart will reflect the percentage of votes for a change in law (“yes votes”)
+	- The bubble chart will reflect the % of yes votes, the % of votes for the Labor Party and the % of population that with a higher education
+	- The map will reflect the electorates within each state, the elected political party, the % of yes votes and the participation rate in the MPS
+
 
 ## Coding approach
 The following approach has been used:
-- Exploratory data analysis
 - Extract
 - Transform
 - Load
+- Exploratory data analysis
 - Set up Flask app
-- Connect to database
-- Create routes
 - Create visualisations
 
 More detailed information on the coding approach can be found here (include link to slides to be uploaded on GitHub).
+
 
 ## Data mungling techniques
 
@@ -64,7 +81,6 @@ The following data mungling techniques have been used:
 - Recreate bins so that all age bins used within all tables are consistent 
 
 
-
 ## Visualisations
 
 The following visualisations have been created:
@@ -73,9 +89,28 @@ The following visualisations have been created:
 - Bar chart - A state can be selected from the drop down menu. The chart reflects the age demographics (classified in age bins) of the respondents within each electorate.
 - Map - The map shoes the percentage of yes votes for each electorate based on colour coding. An electorate can be selected which shows a label with details on the electorate, elected party, % of yes votes and participation rate the Marriage Postal Survey.
 
+
 ## Observations
 
-## Proposed enhancements and challenges
+- For states with a very few electorates, it can be easily observed whether electorates with a higher % of education tend to vote Liberal or Labor, and whether these this depends on the amount of elderly people or younger people. This does not seem to be consistent across states (compare NT/ACT vs. TAS)
+- The map shows the elected party within each electorate, as well as the yes votes and participation rate. 
+- This allows politicians and campaign runners to target their campaigns to specific electorates based on 
+	- voting preferences 
+	- participation rate
+	- people in specific age categories or with a specific level of education
+
+
+## Proposed improvements and challenges
+
+Challenges:
+- As the dataset did not contain the coordinates of the electorates, the outlining of each of the electorates had to be created using GeoJSON. 
+- Opening the app on Australia (and not on state level)
+- Various data sources have slightly different names for certain electorates which resulted in a mismatch in number of data entry points
+
+Improvements:
+- No colour was shown for certain electorates in the map as some data was missing in part of the data sources
+- Trend analysis at a glance whether a similar trend can be identified between age, education and voting behaviour across all states or whether the trend is different within each state
+
 
 ## Heroku deployment
 
