@@ -1,6 +1,50 @@
-/* current css styling relates to choropleth and map */
+
+.jumbotron {
+  color:white;
+  background-color: rgb(47, 162, 150);
+}
+
+.about {
+  font: 15px;
+}
+
+p {
+  font: 12px;
+}
+
+#map
+{
+    width: 100px;
+    height:100px;
+    min-height: 100%;
+    min-width: 100%;
+    display: block;
+}
+
+html, body
+{
+    height: 100%;
+}
+
+#map-holder{
+    height: 100%;
+}
+
+.fill
+{
+    min-height: 100%;
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
+}
+
+.mapcontainer{
+    max-width:60em;
+    padding: 0.2em;
+}
 
 
+/* css styling relating to choropleth and map */
 body {
   padding: 0;
   margin: 0;
@@ -52,4 +96,42 @@ html {
 
 h1 {
   text-align: center;
+  font: 18px;
+}
+
+/* navbar*/
+
+#navbar-rectangle {
+  width: 100%;
+  /* top,right,bottom,left*/
+  padding-top: 10px; 
+  padding-bottom: 10px;
+
+  background-color: rgb(47, 162, 150);
+}
+
+
+/*changing background color for tablets and smaller devices*/
+@media only screen and (max-width: 992px) {
+  #navbar-rectangle {
+  background-color:rgb(47, 162, 150);
+  }
+}
+
+
+#navbar-header {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-size: 25px;
+  color:white;
+  background-color: rgb(47, 162, 150);
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.nav-link {
+  font-size: 15px;
+  color:white;
 }

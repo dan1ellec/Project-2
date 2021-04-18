@@ -89,7 +89,15 @@ The following visualisations have been created:
 - Bar chart - A state can be selected from the drop down menu. The chart reflects the age demographics (classified in age bins) of the respondents within each electorate.
 - Map - The map shoes the percentage of yes votes for each electorate based on colour coding. An electorate can be selected which shows a label with details on the electorate, elected party, % of yes votes and participation rate the Marriage Postal Survey.
 
+
 ## Observations
+
+- For states with a very few electorates, it can be easily observed whether electorates with a higher % of education tend to vote Liberal or Labor, and whether these this depends on the amount of elderly people or younger people. This does not seem to be consistent across states (compare NT/ACT vs. TAS)
+- The map shows the elected party within each electorate, as well as the yes votes and participation rate. 
+- This allows politicians and campaign runners to target their campaigns to specific electorates based on 
+	- voting preferences 
+	- participation rate
+	- people in specific age categories or with a specific level of education
 
 
 ## Proposed improvements and challenges
