@@ -22,14 +22,18 @@ from flask_sqlalchemy import SQLAlchemy
 from login import username
 from login import password
 
-# #################################################
-# # Database Setup
-# #################################################
 
-# from flask_sqlalchemy import SQLAlchemy
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///db.sqlite"
+# Setting up our Flask application.
+app = Flask(__name__)
 
-# db = SQLAlchemy(app)
+#################################################
+# Database Setup
+#################################################
+
+from flask_sqlalchemy import SQLAlchemy
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///db.sqlite"
+
+db = SQLAlchemy(app)
 
 # Connecting to database
 
@@ -62,8 +66,7 @@ session = Session(engine)
 
 # print(names)
 
-# Setting up our Flask application.
-app = Flask(__name__)
+
 
 # create route that renders index.html template
 @app.route("/")
