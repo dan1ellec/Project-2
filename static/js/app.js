@@ -167,7 +167,7 @@ function starting_plots(index){
                     thickness: 10,
                     y: 0.5,
                     ypad: 0,
-                    title: 'Liberal to labor',
+                    title: '% Labor Votes',
                     titleside: 'bottom',
                     outlinewidth: 1,
                     outlinecolor: 'black',
@@ -183,16 +183,16 @@ function starting_plots(index){
         var data = [trace1];
       
         var layout = {
-            title: `Correlation between federal election results and education for State ${stateNames[index]} Size of bubble represented by percentage of yes votes`,
+            title: `${stateNames[index]}: Higher Education Percentage vs. 2016 Federal Election Votes <br> Bubble Size Represents Percentage of Yes Votes`,
             xaxis: {
-             title: "Percentage of labor votes in 2016 federal election as opposed to liberal"
+             title: "Labor Votes in 2016 Federal Election (As % of All Labor and Liberal Votes)"
             },
             yaxis: {
-                title: "Percentage of population with a higher education"
+                title: "Electorate Population With Higher Education (%)"
             },
             showlegend: false,
             height: 600,
-            width: 1000
+            width: 1100
             };
       
         // Render the plot to the div tag with id "bubble"
@@ -248,7 +248,7 @@ function starting_plots(index){
         for (i = 0; i < section.length; i++) {
             var value = section[i].ages_18_34;
             var total = section[i].ages_18_34 + section[i].ages_35_49 + section[i].ages_50_64 + section[i].ages_65_79 + section[i].ages_80_plus
-            var percent = Math.round((value/total)*100);
+            var percent = (value/total)*100;
             ages_18_34.push(percent);
         }
         console.log("ages_18_34");
@@ -260,7 +260,7 @@ function starting_plots(index){
         for (i = 0; i < section.length; i++) {
             value = section[i].ages_35_49;
             var total = section[i].ages_18_34 + section[i].ages_35_49 + section[i].ages_50_64 + section[i].ages_65_79 + section[i].ages_80_plus
-            var percent = Math.round((value/total)*100);
+            var percent = (value/total)*100;
             ages_35_49.push(percent);
         }
         
@@ -270,7 +270,7 @@ function starting_plots(index){
         for (i = 0; i < section.length; i++) {
             value = section[i].ages_50_64;
             var total = section[i].ages_18_34 + section[i].ages_35_49 + section[i].ages_50_64 + section[i].ages_65_79 + section[i].ages_80_plus
-            var percent = Math.round((value/total)*100);
+            var percent = (value/total)*100;
             ages_50_64.push(percent);
         }
         
@@ -280,7 +280,7 @@ function starting_plots(index){
         for (i = 0; i < section.length; i++) {
             value = section[i].ages_65_79;
             var total = section[i].ages_18_34 + section[i].ages_35_49 + section[i].ages_50_64 + section[i].ages_65_79 + section[i].ages_80_plus
-            var percent = Math.round((value/total)*100);
+            var percent = (value/total)*100;
             ages_65_79.push(percent);
         }
         
@@ -290,7 +290,7 @@ function starting_plots(index){
         for (i = 0; i < section.length; i++) {
             value = section[i].ages_80_plus;
             var total = section[i].ages_18_34 + section[i].ages_35_49 + section[i].ages_50_64 + section[i].ages_65_79 + section[i].ages_80_plus
-            var percent = Math.round((value/total)*100);
+            var percent = (value/total)*100;
             ages_80_plus.push(percent);
         }
         
@@ -308,10 +308,10 @@ function starting_plots(index){
         var trace1 = {
             y: electoral_divisions,
             x: ages_18_34,
-            name: "Ages 18-3",
+            name: "Ages 18-34",
             orientation: "h",
             marker: {
-                color: "LightSteelBlue", 
+                color: "#c5ebb2", 
                 width: 1
             },
             type: "bar"
@@ -323,7 +323,7 @@ function starting_plots(index){
             orientation: "h",
             type: "bar",
             marker: {
-                color: "LightSlateGrey", 
+                color: "#42bea8", 
                 width: 1
             }
         };
@@ -334,7 +334,7 @@ function starting_plots(index){
             orientation: "h",
             type: "bar",
             marker: {
-                color: "DimGray", 
+                color: "#008aad", 
                 width: 1
             }
         };
@@ -345,7 +345,7 @@ function starting_plots(index){
             orientation: "h",
             type: "bar",
             marker: {
-                color: "DarkCyan",
+                color: "#00509c",
                 width: 1
             }
         };
@@ -356,13 +356,13 @@ function starting_plots(index){
             orientation: "h",
             type: "bar",
             marker: {
-                color: "DarkSlateGray",
+                color: "#31005c",
                 width: 1
             }
         };
         var data = [trace1, trace2, trace3, trace4, trace5];
         var layout = {
-            title: `Survey Respondents by Age for State ${stateNames[index]}`,
+            title: `${stateNames[index]}: Survey Respondents by Age`,
             barmode: "stack",
             height: 700,
             width: 600,
@@ -454,7 +454,7 @@ function starting_plots(index){
         var pie_labels = ["Yes votes", "No votes"];
         
         // Creating a variable for colours
-        var pie_colours = ["rgb(50, 55, 60)", "LightGrey"];
+        var pie_colours = ["#58508d", "#bc5090"];
         
         
         // Plotting pie chart
@@ -469,9 +469,9 @@ function starting_plots(index){
         }];
         
         var layout = {
-            title: `Total Vote Types for State ${stateNames[index]}`,
-            height: 600,
-            width: 600
+            title: `${stateNames[index]}: Total Vote Types`,
+            height: 575,
+            width: 575
         };
         
         Plotly.newPlot('pie', data, layout);
