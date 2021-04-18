@@ -23,6 +23,18 @@ from login import username
 from login import password
 
 
+# Setting up our Flask application.
+app = Flask(__name__)
+
+#################################################
+# Database Setup
+#################################################
+
+from flask_sqlalchemy import SQLAlchemy
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///db.sqlite"
+
+db = SQLAlchemy(app)
+
 # Connecting to database
 
 rds_connection_string = f"{username}:{password}@localhost:5432/project_2"
@@ -54,8 +66,7 @@ session = Session(engine)
 
 # print(names)
 
-# Setting up our Flask application.
-app = Flask(__name__)
+
 
 # create route that renders index.html template
 @app.route("/")
