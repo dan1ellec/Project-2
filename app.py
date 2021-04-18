@@ -22,6 +22,14 @@ from flask_sqlalchemy import SQLAlchemy
 from login import username
 from login import password
 
+# #################################################
+# # Database Setup
+# #################################################
+
+# from flask_sqlalchemy import SQLAlchemy
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///db.sqlite"
+
+# db = SQLAlchemy(app)
 
 # Connecting to database
 
