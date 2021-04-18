@@ -1,18 +1,9 @@
-// 3 X CHARTS FOR EACH STATE
-// NEED TO TIDY UP CODE
-
+// URL's
 const url_bubble = "api/bubble";
 
 const url_bar = "api/bar";
 
 const url_pie = "api/pie"; 
-
-// d3.json(url_pie).then(function(data){ 
-//     console.log("PIE DATA")
-//     console.log(data);
-// });
-
-
 
 //////////////////////////////////////////////////////////////////////////////
 
@@ -25,11 +16,7 @@ function init() {
 
     // Using D3 library to read the bubble.json file
     d3.json(url_bubble).then((data => {
-        // Checking the data is being read in properly
-        console.log("DATA");
-        console.log(data);
-
-
+        
         // Need to do a groupby of states as we do not have this yet
         const states = data.reduce((acc, value) => {
             // Group initialization
@@ -44,19 +31,12 @@ function init() {
     
           }, {});
 
-          // Checking the groupby is working properly
-          console.log("GROUPBY STATES for dropdown");
-          console.log(states);
 
           // Determining the order of the dropdown options
           stateNames = [];
-          // AUS
-        //   stateNames.push("AUS");
           // Index 1 = VIC
           stateNames.push(Object.keys(states)[1]);
-          // Index 2 = NSW
           stateNames.push(Object.keys(states)[2]);
-          // Index 0 = SA
           stateNames.push(Object.keys(states)[0]);
           stateNames.push(Object.keys(states)[3]);
           stateNames.push(Object.keys(states)[4]);
@@ -64,7 +44,7 @@ function init() {
           stateNames.push(Object.keys(states)[6]);
           stateNames.push(Object.keys(states)[7]);
                       
-        // this appends the rows in html with option tag .e.g. <option>NSW</option>
+        // Appending the rows in html with option tag .e.g. <option>NSW</option>
         stateNames.forEach((function(x) {
             dropdownMenu.append("option").text(x).property("value", x)
         }));
@@ -104,18 +84,12 @@ function starting_plots(index){
         
         // Accessing the information for each state
         stateInfo = Object.values(states)
-        console.log("testing accessing a particular state for bubble")
-        console.log(stateInfo[1])
-
-
-        // need to access the state information section
+    
+        // To access the state information section
         var sampleData = stateInfo; 
-        // obtaining particular section using index
+        // Obtaining particular section using index
         var section = sampleData[index];
-        console.log("STARTING SECTION for bubble - SA");
-        console.log(section);
-
-
+      
         // Obtaining the values for the bubble chart 
         var x_values = [];
         var i;
@@ -208,8 +182,6 @@ function starting_plots(index){
 
     // Reading in data for bar chart
     d3.json(url_bar).then((data) => {
-        console.log("BAR DATA")
-        console.log(data);
 
         const states = data.reduce((acc, value) => {
             if (!acc[value.state]) {
@@ -219,26 +191,16 @@ function starting_plots(index){
             return acc;
             }, {}
             );
-        console.log("Testing groupby of bar data")
-        console.log(states);
 
         stateNames = Object.keys(states);
-        console.log("Testing state names in bar")
-        console.log(stateNames);
 
         // Accessing the information for each state
         stateInfo = Object.values(states)
-        console.log("testing bar state info")
-        console.log(stateInfo)
-
-
+     
         // need to access the state information section
         var sampleData = stateInfo; 
         // obtaining particular section using index
         var section = sampleData[index];
-        console.log("Starting section for bar - SA");
-        console.log(section);
-
 
         // Obtaining the values for the bar chart 
 
@@ -251,8 +213,6 @@ function starting_plots(index){
             var percent = (value/total)*100;
             ages_18_34.push(percent);
         }
-        console.log("ages_18_34");
-        console.log(ages_18_34);
 
         // ages_35_49: 18667
         var ages_35_49 = [];
@@ -379,8 +339,6 @@ function starting_plots(index){
     
     // Reading in data for pie chart
     d3.json(url_pie).then((data) => {
-        console.log("PIE DATA")
-        console.log(data);
 
         const states = data.reduce((acc, value) => {
             if (!acc[value.state]) {
@@ -390,25 +348,15 @@ function starting_plots(index){
             return acc;
             }, {}
             );
-        console.log("Testing groupby of pie data")
-        console.log(states);
 
         stateNames = Object.keys(states);
-        console.log("Testing state names for pie")
-        console.log(stateNames);
-
         // Accessing the information for each state
-        stateInfo = Object.values(states)
-        console.log("testing pie state info")
-        console.log(stateInfo)
-
+        stateInfo = Object.values(states);
 
         // need to access the state information section
         var sampleData = stateInfo; 
         // obtaining particular section using index
         var section = sampleData[index];
-        console.log("Starting section for pie - SA");
-        console.log(section);
 
 
         // Obtaining the values for the pie chart
@@ -419,8 +367,6 @@ function starting_plots(index){
             yes_count = section[i].yes_count;
             yes_values.push(yes_count);
         }
-        console.log(" PIE yes count for all of selected state")
-        console.log(yes_values)
 
         var no_values = [];
         var i;
@@ -433,29 +379,22 @@ function starting_plots(index){
         var sum_yes = yes_values.reduce(function(a, b){
             return a + b;
         }, 0);
-        console.log("SUM OF YES for electorals of selected state");
-        console.log(sum_yes);
 
         // Need to sum these values in the array together
         var sum_no = no_values.reduce(function(a, b){
             return a + b;
         }, 0);
-        console.log("SUM OF NO for electorals of selected state");
-        console.log(sum_no);
 
         // Creating a variable for pie values that pushes yes and no sums into an array
         var pie_values = [];
         pie_values.push(sum_yes)
         pie_values.push(sum_no)
-        console.log("VALUES FOR PIE CHART for electorals of selected state")
-        console.log(pie_values)
 
         // Creating a variable for labels
         var pie_labels = ["Yes votes", "No votes"];
         
         // Creating a variable for colours
         var pie_colours = ["#58508d", "#bc5090"];
-        
         
         // Plotting pie chart
 
@@ -497,48 +436,25 @@ function optionChanged(stateSelection) {
     var dropdownMenu = d3.select("#selDataset");
     // Assigning the value of the dropdown menu option to a variable idSelection
     var stateSelection = dropdownMenu.node().value;
-    console.log("STATE SELECTION");
-    console.log(stateSelection);
 
-    // now need to link the value stateSlection to a index
-
-    // this is how we reach the actual state 
-    // so the dictionary needs to be accessed through the index
-    // this gets state for index 0?! **
+    // Now need to link the value stateSlection to a index
 
     d3.json(url_bubble).then((data) => {
-
         
         // need to access the state name  
         var sampleData = stateNames; 
-    
 
-        // looping through each dictionary in sampledata
-        // this is so we can find which particular object/dictionary matches the one selected through the dropdown menu
+        // Looping through each dictionary in sampledata
         for (var i = 0; i < sampleData.length; i++) {
-            // comparing the id selected in the dropdown menu to the id of each object
+            // Comparing the id selected in the dropdown menu to the id of each object
             if(sampleData[i] == stateSelection){
 
-                // if they match then the index of the object is obtained
-                // this will then be used to change the graphs
+                // If they match then the index of the object is obtained
                 index = i;
-                console.log("INDEX OF SELECTED")
-                console.log(index)
-
-                // // selecting the current values in the demographic panel
-                // var currentInfo = d3.select("#sample-metadata").selectAll("h5");
-                // // console.log(currentInfo)
-                // // removing the current values in the demographic panel
-                // currentInfo.remove();
 
                 // Updating the plots with the index value based on the selected state
                 starting_plots(index);
-                // // Updating the demographic panel with the index value based on the selected id
-                // demographic(index);
-                // // updating the bonus challenge gauge chart
-                // extra(index);
-
-            
+             
             }
         }
 
