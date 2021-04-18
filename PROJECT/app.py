@@ -17,30 +17,26 @@ from flask import (
     jsonify,
     request,
     redirect)
-#from models import create_classes
 import simplejson
 from flask_sqlalchemy import SQLAlchemy
 from login import username
 from login import password
 
 
-
-
-
-# Connect to database
+# Connecting to database
 
 rds_connection_string = f"{username}:{password}@localhost:5432/project_2"
 engine = create_engine(f'postgresql://{rds_connection_string}')
 
 names = engine.table_names()
 
-
-# reflect an existing database into a new model
+# Reflecting existing database into a new model
 Base = automap_base()
-# reflect the tables
+
+# Reflecting the tables
 Base.prepare(engine, reflect=True)
 
-# Save references to each table
+# Saving references to each table
 Division = Base.classes.electoral_division
 Results = Base.classes.election_results
 Vote_Types = Base.classes.election_vote_types
@@ -56,11 +52,9 @@ Labor_Liberal = Base.classes.labor_liberal_votes
 # Create our session (link) from Python to the DB
 session = Session(engine)
 
+# print(names)
 
-print(names)
-
-#Setting up our Flask application.
-
+# Setting up our Flask application.
 app = Flask(__name__)
 
 # create route that renders index.html template
@@ -74,60 +68,46 @@ def home():
 @app.route("/electorates_map")
 def electorates_map():
     
-    # Render the index.html template
     return render_template("map.html")
 
 # create route that renders bar chart data table
 @app.route("/bar_table")
 def bar_table():
     
-    # Render the index.html template
     return render_template("bar_table.html")
 
 # create route that renders pie chart data table
 @app.route("/pie_table")
 def pie_table():
     
-    # Render the index.html template
     return render_template("pie_table.html")
 
 # create route that renders bubble chart data table
 @app.route("/bubble_table")
 def bubble_table():
     
-    # Render the index.html template
     return render_template("bubble_table.html")
 
 # create route that renders map data table
 @app.route("/map_table")
 def map_table():
     
-    # Render the index.html template
     return render_template("map_table.html")
 
 # create route that renders about page
 @app.route("/about")
 def about():
     
-    # Render the index.html template
     return render_template("about.html")
 
 # create route that renders geoJSON
 @app.route("/map_data/ourJson.geojson")
 def geojson():
     
-    # Render the index.html template
     return render_template("map_data/ourJson.geojson")
+  
 
-# @app.route('/map_data/ourJson.geojson', methods = ['POST'])
-# def GeoJSONHandler():
-#     #print (request.is_json)
-#     content = ourJson.geojson.get_json()
-#     print (content)
-#     return 'JSON posted'   
-
-
-# function which converts results retieved from database into json
+# Function which converts results retieved from database into json
 def query_results_to_dicts(results):
    
     # A helper method for converting SQLAlchemy Query objects 
@@ -171,7 +151,6 @@ def pie():
 
 
 # bar
-# this one now works!
 @app.route("/api/bar")
 def bar():
 
@@ -181,16 +160,13 @@ def bar():
     return query_results_to_dicts(results)
 
 
+# THE FOLLOWING READS IN THE INDIVIDUAL TABLES INCASE THEY ARE EVER NEEDED
 
 # electoral_division table
 @app.route("/api/division")
 def division():
 
     results = session.query(Division.division_id, Division.electoral_division, Division.state ).all()
-    
-    #results = pd.read_sql_query('select * from electoral_division', con=engine).head()
-
-    #print(results)
    
     return query_results_to_dicts(results)
 
@@ -238,23 +214,6 @@ def marriage_turnout():
     results = session.query(Marriage_Turnout.division_id, Marriage_Turnout.total_eligible, Marriage_Turnout.total_participants, Marriage_Turnout.turnout_percent).all()
    
     return query_results_to_dicts(results)
-
-# # marriage_postal_participants_by_age table
-# @app.route("/api/marriage_participants_age")
-# def marriage_participants_age():
-
-#     results = session.query(Marriage_Participants_Age.division_id, Marriage_Participants_Age["ages_18-34"], Marriage_Participants_Age["ages_35-49"], Marriage_Participants_Age["ages_50-64"], Marriage_Participants_Age["ages_65-79"], Marriage_Participants_Age.ages_80_plus).all()
-   
-#     return query_results_to_dicts(results)
-
-
-# # 2017_population_agedemo table
-# @app.route("/api/age")
-# def age():
-
-#     results = session.query(Age.division_id, Age.0-17_percent, Age.18-34_percent, Age.35-49_percent, Age.50-64_percent, Age.65-79_percent, Age.80+_percent, Age.pop_count_est).all()
-   
-#     return query_results_to_dicts(results)
 
 # cultural_diversity table
 @app.route("/api/cultural_diversity")
