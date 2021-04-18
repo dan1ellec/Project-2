@@ -26,8 +26,6 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     accessToken: API_KEY
 }).addTo(myMap);
 
-// L.edgeScaleBar().addTo(map);
-
 // Load in geojson data
 var geoData = "map_data/ourJson.geojson";
 
@@ -43,15 +41,7 @@ d3.json(geoData, function(data) {
     valueProperty: "percentage_yes",
 
     // Set color scale
-    scale: ["#ffffb2", "#b10026"], // original
-    // scale: ["#fff7f3", "#49006a"], // purple
-    // scale: ["#f7f4f9", "#e7298a"], // pink
-    // scale: ["#ffffe5", "#004529"], // green
-    // scale: ["#f7fbff", "#08306b"], // blue
-    // scale: ["#fff7f3", "#063b31"], // purple
-
-    // used https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3
-    // just picked first and last
+    scale: ["#ffffb2", "#b10026"], 
     
     // Number of breaks in step range
     steps: 10,
@@ -70,7 +60,7 @@ d3.json(geoData, function(data) {
       layer.bindPopup("<b>Federal Electorate:</b> " + feature.properties.ELECT_DIV + 
       "<br><b>Elected Party: </b>" + feature.properties.successful_party +
       "<br><b>Yes Votes: </b>"+ Math.round(feature.properties.percentage_yes * 100 + Number.EPSILON ) / 100 + "%" + 
-      "<br><b>Participation: </b>" + Math.round(feature.properties.turnout_percent * 100 + Number.EPSILON) / 100 + "%"
+      "<br><b>Survey Participation: </b>" + Math.round(feature.properties.turnout_percent * 100 + Number.EPSILON) / 100 + "%"
       );
     }
   }).addTo(myMap);
@@ -83,7 +73,6 @@ d3.json(geoData, function(data) {
     var colors = geojson.options.colors;
     var labels = [];
 
-    
     // finding the maximum and the minimum for the yes vote percentage
     var min = limits[0]
     var min_round = Math.round(min * 100 + Number.EPSILON ) / 100 // 26.05
@@ -91,7 +80,6 @@ d3.json(geoData, function(data) {
     var max = limits[limits.length - 1]
     var max_round = Math.round(max * 100 + Number.EPSILON ) / 100 //83.69
 
-    
     // Add min & max
     var legendInfo = "<h1>Percentage of Yes Votes</h1>" +
       "<div class=\"labels\">" +
