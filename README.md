@@ -114,7 +114,7 @@ Improvements:
 
 ## Heroku deployment
 
-The project has been deployed to Heroku and the visualisation is available at: https://xxxxxxx.herokuapp.com/
+The project has been deployed to Heroku and the visualisation is available at: https://ausmarriagelawpostalsurvey.herokuapp.com/
 
 
 
